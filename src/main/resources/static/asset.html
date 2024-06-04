@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>数据监控查询</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px 0;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>数据监控查询</h1>
+        <form>
+            <label for="customerId">请输入客户号</label>
+            <input type="text" id="customerId" name="customerId">
+            <label for="dateType">请选择日期类型</label>
+            <select id="dateType" name="dateType">
+                <option value="range">开始-结束日期</option>
+                <option value="single">单日期</option>
+            </select>
+            <div id="dateRangeFields">
+                <label for="startDate">请输入开始日期 (YYYYMMDD)</label>
+                <input type="text" id="startDate" name="startDate">
+                <label for="endDate">请输入结束日期 (YYYYMMDD)</label>
+                <input type="text" id="endDate" name="endDate">
+            </div>
+            <div id="singleDateField" style="display: none;">
+                <label for="singleDate">请输入单日期 (YYYYMMDD)</label>
+                <input type="text" id="singleDate" name="singleDate">
+            </div>
+            <button type="button" id="queryButton">查询</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="script-asset.js"></script>
+</body>
+</html>
