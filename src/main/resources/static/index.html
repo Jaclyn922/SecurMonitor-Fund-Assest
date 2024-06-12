@@ -2,48 +2,92 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>数据监控查询</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
         }
         .container {
-            width: 50%;
+            width: 80%;
             margin: auto;
         }
         h1 {
             text-align: center;
             color: #333;
         }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0 20px 0;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
         }
-        button {
-            width: 100%;
-            padding: 10px;
+        nav a {
+            display: block;
+            padding: 20px;
+            margin: 0 10px;
             background-color: #4CAF50;
             color: white;
+            text-decoration: none;
             border: none;
             cursor: pointer;
         }
-        button:hover {
+        nav a:hover {
             background-color: #45a049;
+        }
+        #content {
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>数据监控查询</h1>
-        <form>
-            <label><a href="asset.html">资产</a></label>
-            <label><a href="fund.html">基金</a></label>
-        </form>
-        <div id="result"></div>
+        <nav>
+            <a href="asset.html" id="assetLink">资产</a>
+            <a href="fund.html" id="fundLink">基金</a>
+        </nav>
+        <div id="content"></div>
     </div>
+    <script>
+        $(document).ready(function() {
+            function loadAssetContent() {
+                $('#content').load('asset.html .container > *', function() {
+                    $.getScript('script-asset.js');
+                });
+            }
+
+            $('#assetLink').click(function(event) {
+                event.preventDefault();
+                loadAssetContent();
+            });
+
+            $('#fundLink').click(function(event) {
+                event.preventDefault();
+                $('#content').load('fund.html .container > *', function() {
+                    $.getScript('script-fund.js');
+                });
+            });
+
+            loadAssetContent(); // 默认加载资产查询页面
+        });
+
+        function setupDefaultDate() {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const formattedToday = `${yyyy}${mm}${dd}`;
+
+            if ($('#singleDate').length && $('#singleDate').val() === '') {
+                $('#singleDate').val(formattedToday);
+            }
+            if ($('#startDate').length && $('#startDate').val() === '') {
+                $('#startDate').val(formattedToday);
+            }
+            if ($('#endDate').length && $('#endDate').val() === '') {
+                $('#endDate').val(formattedToday);
+            }
+        }
+    </script>
 </body>
 </html>
+
+

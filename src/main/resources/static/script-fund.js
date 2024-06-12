@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 function queryData() {
     const customerId = $('#customerId').val();
-    const jjdm = $('#jjdm').val().split(',').map(code => code.trim());
+    const jjdm = $('#jjdm').val().split(',').map(code => code.trim());//可输入多个基金
 
     console.log('输入的客户号:', customerId);
     console.log('输入的基金代码:', jjdm);
@@ -29,14 +29,14 @@ function queryData() {
             let resultHTML = `<h2>查询结果</h2>`;
 
             data.forEach(item => {
-                resultHTML += `<h3>客户号: ${item.khh}</h3>`;
-                resultHTML += `<p>客户姓名: ${item.khxm}</p>`;
-                resultHTML += `<p>基金代码: ${item.jjdm}</p>`;
-                resultHTML += `<p>基金简称: ${item.jjjc}</p>`;
-                resultHTML += `<p>开放日: ${item.kcrq}</p>`;
-                resultHTML += `<p>份额累计: ${item.fhlj}</p>`;
-                resultHTML += `<p>持仓收益: ${item.ccsy}</p>`;
-                resultHTML += `<p>总收益: ${item.zsy}</p>`;
+                resultHTML += `<h3>客户号: ${item.khh !== undefined && item.khh !== null ? item.khh : '--'}</h3>`;
+                resultHTML += `<p>客户姓名: ${item.khxm !== undefined && item.khxm !== null ? item.khxm : '--'}</p>`;
+                resultHTML += `<p>基金代码: ${item.jjdm !== undefined && item.jjdm !== null ? item.jjdm : '--'}</p>`;
+                resultHTML += `<p>基金简称: ${item.jjjc !== undefined && item.jjjc !== null ? item.jjjc : '--'}</p>`;
+                resultHTML += `<p>开放日: ${item.kcrq !== undefined && item.kcrq !== null ? item.kcrq : '--'}</p>`;
+                resultHTML += `<p>份额累计: ${item.fhlj!== undefined && item.fhlj !== null ? item.fhlj : '--'}</p>`;
+                resultHTML += `<p>持仓收益: ${item.ccsy !== undefined && item.ccsy !== null ? item.ccsy : '--'}</p>`;
+                resultHTML += `<p>总收益: ${item.zsy!== undefined && item.zsy !== null ? item.zsy : '--'}</p>`;
 
                 if (item.jjfjhr && item.jjfjhr.length > 0) {
                     resultHTML += `<h4>分红记录:</h4>`;
